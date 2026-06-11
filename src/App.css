@@ -1,7 +1,6 @@
-// src/components/Gallery.jsx
+// src/ui/Gallery.jsx  <-- Make sure this is in your new 'ui' folder!
 
 function Gallery() {
-  // Array of famous global destinations
   const photos = [
     { id: 1, name: "Santorini, Greece", url: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?q=80&w=800&auto=format&fit=crop" },
     { id: 2, name: "Taj Mahal, India", url: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=800&auto=format&fit=crop" },
@@ -21,15 +20,14 @@ function Gallery() {
       <div className="row g-4">
         {photos.map((photo) => (
           <div className="col-md-4 col-sm-6" key={photo.id}>
-            {/* Adding a subtle hover effect using standard Bootstrap classes */}
             <div className="card border-0 shadow-sm overflow-hidden h-100 position-relative">
               <img 
                 src={photo.url} 
                 alt={photo.name} 
                 className="card-img-top"
                 style={{ height: '250px', objectFit: 'cover', transition: 'transform 0.3s ease' }}
-                onMouseOver={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
               />
               <div className="position-absolute bottom-0 start-0 w-100 p-3" style={{ background: 'linear-gradient(transparent, rgba(0,0,0,0.8))' }}>
                 <h5 className="text-white mb-0 fw-bold">{photo.name}</h5>

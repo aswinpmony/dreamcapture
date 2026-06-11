@@ -1,9 +1,11 @@
 // src/App.jsx
-import Header from './components/Header';
-import Hero from './components/Hero';
-import TourList from './components/TourList';
-import Gallery from './components/Gallery';
-import Footer from './components/Footer'; // Import the new Footer
+
+import Header from './ui/Header';
+import Hero from './ui/Hero';
+import TourList from './ui/TourList';
+import TourCard from './ui/TourCard';
+import Gallery from './ui/Gallery';
+import Footer from './ui/Footer';
 
 
 function App() {
