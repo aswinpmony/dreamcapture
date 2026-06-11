@@ -7,9 +7,11 @@ const cardStyle = {
   border: "none",
   transition: "transform 0.28s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.28s ease",
   cursor: "pointer", boxShadow: "0 2px 16px rgba(10,15,30,0.08)", position: "relative",
+  // 1. Force the card to take full height and use Flexbox
+  height: "100%", display: "flex", flexDirection: "column"
 };
 const cardHoverStyle = { transform: "translateY(-10px)", boxShadow: "0 24px 60px rgba(10,15,30,0.16)" };
-const imgWrapStyle  = { position: "relative", overflow: "hidden", height: "220px" };
+const imgWrapStyle  = { position: "relative", overflow: "hidden", height: "220px", flexShrink: 0 };
 const imgStyle      = { width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" };
 const imgHoverStyle = { transform: "scale(1.08)" };
 const badgeStyle    = {
@@ -26,7 +28,11 @@ const priceBadgeStyle = {
   boxShadow:"0 4px 16px rgba(255,107,74,0.4)", lineHeight:1,
   display:"flex", flexDirection:"column", alignItems:"center",
 };
-const bodyStyle     = { padding: "1.35rem 1.4rem 1.5rem" };
+const bodyStyle     = { 
+  padding: "1.35rem 1.4rem 1.5rem",
+  // 2. Allow the body to grow and fill the remaining space
+  display: "flex", flexDirection: "column", flexGrow: 1 
+};
 const destStyle     = {
   fontFamily:"'Inter',sans-serif", fontSize:"0.7rem", fontWeight:700,
   letterSpacing:"0.16em", textTransform:"uppercase", color:"#FF6B4A",
@@ -36,7 +42,11 @@ const titleStyle    = {
   fontFamily:"'Playfair Display',serif", fontWeight:700,
   fontSize:"1.22rem", color:"#0A0F1E", marginBottom:"0.55rem", lineHeight:1.25,
 };
-const descStyle     = { fontFamily:"'Inter',sans-serif", fontSize:"0.845rem", color:"#6B7280", lineHeight:1.65, marginBottom:"1.1rem" };
+const descStyle     = { 
+  fontFamily:"'Inter',sans-serif", fontSize:"0.845rem", color:"#6B7280", lineHeight:1.65, marginBottom:"1.1rem",
+  // 3. Truncate text after exactly 3 lines!
+  display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden"
+};
 const metaStyle     = {
   display:"flex", alignItems:"center", gap:"16px", marginBottom:"1.25rem",
   paddingBottom:"1.1rem", borderBottom:"1px solid #F3F4F6",
@@ -65,10 +75,12 @@ export default function TourCard({ tour }) {
     rating      = 4.9,
     reviews     = 218,
     price       = 2499,
-    badge       = "Bestseller",
+    badge       = "",
     description = "Explore pristine alpine meadows, glacial lakes, and charming mountain villages.",
     image       = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80",
   } = tour || {};
+
+  const displayPrice = typeof price === "number" ? price.toLocaleString("en-IN") : price;
 
   return (
     <>
@@ -84,7 +96,7 @@ export default function TourCard({ tour }) {
           {badge && <span style={badgeStyle}>{badge}</span>}
           <div style={priceBadgeStyle}>
             <span style={{ fontSize:"0.65rem", fontFamily:"'Inter',sans-serif", fontWeight:500, opacity:0.85 }}>from</span>
-            <span>₹{price.toLocaleString("en-IN")}</span>
+            <span>₹{displayPrice}</span>
           </div>
           <div style={{ position:"absolute", bottom:0, left:0, right:0, height:"60px",
             background:"linear-gradient(to top,rgba(10,15,30,0.35),transparent)" }} />
@@ -99,42 +111,46 @@ export default function TourCard({ tour }) {
             {destination}
           </div>
           <h3 style={titleStyle}>{title}</h3>
+          
+          {/* Description is now locked to a max of 3 lines */}
           <p style={descStyle}>{description}</p>
 
-          <div style={metaStyle}>
-            <div style={metaItemStyle}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2">
-                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-              </svg>
-              {duration}
+          {/* 4. This wrapper forces the button and meta info to ALWAYS stick to the bottom of the card */}
+          <div style={{ marginTop: "auto" }}>
+            <div style={metaStyle}>
+              <div style={metaItemStyle}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                {duration}
+              </div>
+              <div style={metaItemStyle}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                {groupSize}
+              </div>
+              <div style={metaItemStyle}>
+                <span style={{ color:"#FF6B4A", fontSize:"0.75rem", letterSpacing:"1px" }}>★</span>
+                {rating} ({reviews})
+              </div>
             </div>
-            <div style={metaItemStyle}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-              {groupSize}
-            </div>
-            <div style={metaItemStyle}>
-              <span style={{ color:"#FF6B4A", fontSize:"0.75rem", letterSpacing:"1px" }}>★</span>
-              {rating} ({reviews})
-            </div>
-          </div>
 
-          <button
-            style={bookBtnStyle}
-            onClick={() => setShowModal(true)}
-            onMouseEnter={e => e.target.style.background = "#FF6B4A"}
-            onMouseLeave={e => e.target.style.background = "#0A0F1E"}
-          >
-            Book Now →
-          </button>
+            <button
+              style={bookBtnStyle}
+              onClick={() => setShowModal(true)}
+              onMouseEnter={e => e.target.style.background = "#FF6B4A"}
+              onMouseLeave={e => e.target.style.background = "#0A0F1E"}
+            >
+              Book Now →
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Booking Modal — mounts outside the card so it overlays the full page */}
       {showModal && (
         <BookingModal
           tour={tour}

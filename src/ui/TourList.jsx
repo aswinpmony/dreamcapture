@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TourCard from "./TourCard";
-
+import { client } from "../client";
 const sectionStyle = {
   background: "#F8F7F4",
   padding: "100px 0",
@@ -30,92 +30,35 @@ const filterBtnActive = {
   ...filterBtnBase, background: "#0A0F1E", borderColor: "#0A0F1E", color: "#fff",
 };
 
-/* ── Tour data — update price from USD → INR ── */
-const tours = [
-  {
-    id: 1,
-    title: "Swiss Alpine Retreat",
-    destination: "Switzerland",
-    duration: "8 Days",
-    groupSize: "Max 10",
-    rating: 4.9, reviews: 218,
-    price: 85000,
-    badge: "Bestseller",
-    region: "Europe",
-    description: "Pristine alpine meadows, glacial lakes, and charming mountain villages on this immersive Swiss journey.",
-    image: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=600&q=80",
-  },
-  {
-    id: 2,
-    title: "Santorini Sunset Escape",
-    destination: "Greece",
-    duration: "6 Days",
-    groupSize: "Max 8",
-    rating: 4.8, reviews: 341,
-    price: 65000,
-    badge: "Top Rated",
-    region: "Europe",
-    description: "Iconic white-washed terraces, volcanic beaches, and world-famous Aegean sunsets.",
-    image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80",
-  },
-  {
-    id: 3,
-    title: "Kyoto Cultural Immersion",
-    destination: "Japan",
-    duration: "10 Days",
-    groupSize: "Max 12",
-    rating: 5.0, reviews: 156,
-    price: 110000,
-    badge: "New",
-    region: "Asia",
-    description: "Ancient temples, bamboo forests, traditional tea ceremonies, and the art of Japanese slow living.",
-    image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80",
-  },
-  {
-    id: 4,
-    title: "Moroccan Desert Odyssey",
-    destination: "Morocco",
-    duration: "9 Days",
-    groupSize: "Max 10",
-    rating: 4.7, reviews: 192,
-    price: 58000,
-    badge: "Adventure",
-    region: "Africa",
-    description: "Shifting Sahara dunes, medieval medinas, spice-scented souks, and nights beneath a canopy of stars.",
-    image: "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&q=80",
-  },
-  {
-    id: 5,
-    title: "Patagonia Wilderness Trek",
-    destination: "Argentina",
-    duration: "12 Days",
-    groupSize: "Max 8",
-    rating: 4.9, reviews: 87,
-    price: 142000,
-    badge: "Exclusive",
-    region: "Americas",
-    description: "Towering granite spires, turquoise glacial lakes, and untouched wilderness at the end of the world.",
-    image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
-  },
-  {
-    id: 6,
-    title: "Amalfi Coast Drive",
-    destination: "Italy",
-    duration: "7 Days",
-    groupSize: "Max 6",
-    rating: 4.8, reviews: 274,
-    price: 95000,
-    badge: "Luxury",
-    region: "Europe",
-    description: "Cliffside villages draped in bougainvillea, cerulean waters, fresh-caught seafood and la dolce vita.",
-    image: "https://images.unsplash.com/photo-1612698093158-e07ac200d44e?w=600&q=80",
-  },
-];
-
 const filters = ["All", "Europe", "Asia", "Africa", "Americas"];
 
 export default function TourList() {
+  const [tours, setTours] = useState([]);
   const [active, setActive] = useState("All");
+
+  useEffect(() => {
+    const query = `*[_type == "tour"]{
+      _id,
+      title,
+      destination,
+      region,
+      duration,
+      groupSize,
+      price,
+      rating,
+      reviews,
+      badge,
+      description,
+      "image": image.asset->url
+    }`;
+
+    client.fetch(query)
+      .then((data) => {
+        console.log("Sanity Data:", data);
+        setTours(data);
+      })
+      .catch((error) => console.error("Sanity fetch error:", error));
+  }, []);
 
   const filtered = active === "All"
     ? tours
@@ -155,7 +98,7 @@ export default function TourList() {
           </div>
         </div>
 
-        {/* Filter Pills — now actually filters the cards */}
+        {/* Filter Pills */}
         <div className="d-flex flex-wrap gap-2 mb-5">
           {filters.map((f) => (
             <button
@@ -184,7 +127,7 @@ export default function TourList() {
         <div className="row g-4">
           {filtered.length > 0 ? (
             filtered.map((tour) => (
-              <div key={tour.id} className="col-12 col-md-6 col-lg-4">
+              <div key={tour._id} className="col-12 col-md-6 col-lg-4">
                 <TourCard tour={tour} />
               </div>
             ))
