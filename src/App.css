@@ -1,0 +1,45 @@
+// src/components/Gallery.jsx
+
+function Gallery() {
+  // Array of famous global destinations
+  const photos = [
+    { id: 1, name: "Santorini, Greece", url: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?q=80&w=800&auto=format&fit=crop" },
+    { id: 2, name: "Taj Mahal, India", url: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=800&auto=format&fit=crop" },
+    { id: 3, name: "Swiss Alps, Switzerland", url: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=800&auto=format&fit=crop" },
+    { id: 4, name: "Bali, Indonesia", url: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800&auto=format&fit=crop" },
+    { id: 5, name: "Machu Picchu, Peru", url: "https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=800&auto=format&fit=crop" },
+    { id: 6, name: "Eiffel Tower, France", url: "https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?q=80&w=800&auto=format&fit=crop" }
+  ];
+
+  return (
+    <section className="container py-5" id="gallery">
+      <div className="text-center mb-5">
+        <h2 className="fw-bold">Wanderlust Gallery</h2>
+        <p className="text-muted">Glimpses of beautiful destinations around the globe</p>
+      </div>
+
+      <div className="row g-4">
+        {photos.map((photo) => (
+          <div className="col-md-4 col-sm-6" key={photo.id}>
+            {/* Adding a subtle hover effect using standard Bootstrap classes */}
+            <div className="card border-0 shadow-sm overflow-hidden h-100 position-relative">
+              <img 
+                src={photo.url} 
+                alt={photo.name} 
+                className="card-img-top"
+                style={{ height: '250px', objectFit: 'cover', transition: 'transform 0.3s ease' }}
+                onMouseOver={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+              />
+              <div className="position-absolute bottom-0 start-0 w-100 p-3" style={{ background: 'linear-gradient(transparent, rgba(0,0,0,0.8))' }}>
+                <h5 className="text-white mb-0 fw-bold">{photo.name}</h5>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export default Gallery;

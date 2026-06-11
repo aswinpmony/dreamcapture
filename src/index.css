@@ -1,0 +1,46 @@
+/* =============================================
+   Dream Capture Travels — Global CSS
+   Add this to your src/index.css (or App.css)
+   ============================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ✅ Smooth scrolling for all anchor (#) navigation */
+html {
+  scroll-behavior: smooth;
+}
+
+/*
+  ✅ scroll-margin-top — prevents the fixed navbar (≈70px tall)
+  from covering the section heading when an anchor link is clicked.
+  Applied to every element that has an id attribute.
+*/
+[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Fix Bootstrap navbar toggler focus glow */
+.navbar-toggler:focus {
+  box-shadow: none !important;
+  outline: none;
+}
+
+/* Prevent horizontal overflow on mobile */
+body, #root {
+  overflow-x: hidden;
+}
+
+/* Gallery d-md-grid helper (Bootstrap doesn't ship this) */
+@media (min-width: 768px) {
+  .d-md-grid {
+    display: grid !important;
+  }
+}
