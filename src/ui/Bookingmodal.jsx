@@ -1,4 +1,4 @@
-// src/components/BookingModal.jsx
+
 import React, { useState } from "react";
 
 /* ════════════════════════════════════════════════

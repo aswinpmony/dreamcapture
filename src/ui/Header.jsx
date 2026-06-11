@@ -1,40 +1,29 @@
 import React, { useState, useEffect } from "react";
+import logo from '../assets/CAPTURE-DREAMS-LOGO.png';
 
 const navStyle = {
   transition: "background 0.4s ease, box-shadow 0.4s ease",
   zIndex: 1050,
 };
 
+// 1. New Bright Frosted Glass Styles
 const glassStyle = {
-  background: "rgba(10, 15, 30, 0.55)",
+  background: "rgba(255, 255, 255, 0.85)", // White glass
   backdropFilter: "blur(18px)",
   WebkitBackdropFilter: "blur(18px)",
-  boxShadow: "0 4px 32px rgba(0,0,0,0.18)",
-  borderBottom: "1px solid rgba(255,255,255,0.08)",
+  boxShadow: "0 4px 32px rgba(0,0,0,0.05)",
+  borderBottom: "1px solid rgba(0,0,0,0.05)",
 };
-
 const solidStyle = {
-  background: "rgba(10, 15, 30, 0.97)",
-  boxShadow: "0 2px 16px rgba(0,0,0,0.32)",
+  background: "rgba(255, 255, 255, 0.98)", // Solid white when scrolled
+  boxShadow: "0 2px 16px rgba(0,0,0,0.08)",
 };
 
-const logoStyle = {
-  fontFamily: "'Playfair Display', serif",
-  fontWeight: 700,
-  fontSize: "1.45rem",
-  letterSpacing: "-0.01em",
-  color: "#FFFFFF",
-  textDecoration: "none",
-};
-
-const logoAccentStyle = {
-  color: "#FF6B4A",
-};
-
+// 2. Text changed to Dark Navy so it shows up on the white background
 const navLinkStyle = {
-  color: "rgba(255,255,255,0.82)",
+  color: "#0A0F1E", // Matches your dark website background!
   fontSize: "0.875rem",
-  fontWeight: 500,
+  fontWeight: 600, // Made slightly bolder to read better
   letterSpacing: "0.04em",
   textTransform: "uppercase",
   textDecoration: "none",
@@ -48,7 +37,7 @@ const ctaBtnStyle = {
   color: "#fff",
   border: "none",
   borderRadius: "50px",
-  padding: "0.45rem 1.4rem",
+  padding: "0.5rem 1.5rem",
   fontFamily: "'Inter', sans-serif",
   fontSize: "0.85rem",
   fontWeight: 600,
@@ -59,13 +48,12 @@ const ctaBtnStyle = {
   display: "inline-block",
 };
 
-// ✅ Each link now has a matching section id
 const navLinks = [
-  { label: "Home",        href: "#home"    },
-  { label: "Tours",       href: "#tours"   },
-  { label: "Gallery",     href: "#gallery" },
-  { label: "About",       href: "#about"   },
-  { label: "Contact",     href: "#contact" },
+  { label: "Home",    href: "#home"    },
+  { label: "Tours",   href: "#tours"   },
+  { label: "Gallery", href: "#gallery" },
+  { label: "About",   href: "#about"   },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Header() {
@@ -78,8 +66,15 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on any nav-link click
   const handleLinkClick = () => setMenuOpen(false);
+
+  // 3. Removed the CSS filter. Logo is 100% original colors now.
+  const logoStyle = {
+    height: scrolled ? "46px" : "58px",
+    width: "auto",
+    display: "block",
+    transition: "height 0.35s ease",
+  };
 
   return (
     <nav
@@ -87,13 +82,13 @@ export default function Header() {
       style={{ ...navStyle, ...(scrolled ? solidStyle : glassStyle) }}
     >
       <div className="container">
-        {/* Logo → scrolls to top */}
-        <a href="#home" style={logoStyle} onClick={handleLinkClick}>
-          Dream<span style={logoAccentStyle}>Capture</span>{" "}
-          
+
+        {/* Logo */}
+        <a href="#home" onClick={handleLinkClick} style={{ textDecoration: "none", lineHeight: 0 }}>
+          <img src={logo} alt="Dream Capture Travels" style={logoStyle} />
         </a>
 
-        {/* Mobile toggler */}
+        {/* Mobile toggler - 4. Changed the white lines to dark navy! */}
         <button
           className="navbar-toggler border-0 p-1"
           type="button"
@@ -101,9 +96,9 @@ export default function Header() {
           aria-label="Toggle navigation"
           style={{ boxShadow: "none" }}
         >
-          <span style={{ display: "block", width: 24, height: 2, background: "#fff", marginBottom: 5, transition: "all 0.2s" }} />
+          <span style={{ display: "block", width: 24, height: 2, background: "#0A0F1E", marginBottom: 5, transition: "all 0.2s" }} />
           <span style={{ display: "block", width: 16, height: 2, background: "#FF6B4A", marginBottom: 5 }} />
-          <span style={{ display: "block", width: 24, height: 2, background: "#fff" }} />
+          <span style={{ display: "block", width: 24, height: 2, background: "#0A0F1E" }} />
         </button>
 
         {/* Nav links */}
@@ -115,8 +110,8 @@ export default function Header() {
                   href={href}
                   style={navLinkStyle}
                   onClick={handleLinkClick}
-                  onMouseEnter={(e) => (e.target.style.color = "#FF6B4A")}
-                  onMouseLeave={(e) => (e.target.style.color = "rgba(255,255,255,0.82)")}
+                  onMouseEnter={e => e.target.style.color = "#FF6B4A"}
+                  onMouseLeave={e => e.target.style.color = "#0A0F1E"} // Reset to dark navy
                 >
                   {label}
                 </a>
@@ -127,11 +122,11 @@ export default function Header() {
                 href="#tours"
                 style={ctaBtnStyle}
                 onClick={handleLinkClick}
-                onMouseEnter={(e) => {
+                onMouseEnter={e => {
                   e.target.style.background = "#e85a39";
                   e.target.style.transform = "translateY(-1px)";
                 }}
-                onMouseLeave={(e) => {
+                onMouseLeave={e => {
                   e.target.style.background = "#FF6B4A";
                   e.target.style.transform = "translateY(0)";
                 }}

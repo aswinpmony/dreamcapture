@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import logo from '../assets/CAPTURE-DREAMS-LOGO.png'; // <- Imported your logo!
 
 const footerStyle = {
-  background: "#05080F",
-  borderTop: "1px solid rgba(255,255,255,0.05)",
+  background: "#F8F9FA", // Clean light gray/white background
+  borderTop: "1px solid rgba(0,0,0,0.08)",
   fontFamily: "'Inter', sans-serif",
 };
-const topBarStyle    = { padding:"80px 0 60px", borderBottom:"1px solid rgba(255,255,255,0.07)" };
-const logoStyle      = { fontFamily:"'Playfair Display',serif", fontWeight:700, fontSize:"1.6rem", color:"#FFFFFF", textDecoration:"none", display:"inline-block", marginBottom:"1rem" };
-const taglineStyle   = { fontSize:"0.875rem", color:"rgba(255,255,255,0.4)", lineHeight:1.7, maxWidth:"280px", marginBottom:"1.75rem" };
-const socialBtnStyle = { display:"inline-flex", alignItems:"center", justifyContent:"center", width:"38px", height:"38px", borderRadius:"50%", border:"1px solid rgba(255,255,255,0.12)", color:"rgba(255,255,255,0.55)", textDecoration:"none", transition:"all 0.2s", fontSize:"0.8rem" };
-const colHeadStyle   = { fontSize:"0.7rem", fontWeight:700, letterSpacing:"0.18em", textTransform:"uppercase", color:"rgba(255,255,255,0.35)", marginBottom:"1.25rem" };
-const linkStyle      = { display:"block", color:"rgba(255,255,255,0.6)", textDecoration:"none", fontSize:"0.875rem", marginBottom:"0.65rem", transition:"color 0.18s" };
-const newsletterInputStyle = { background:"rgba(255,255,255,0.06)", border:"1px solid rgba(255,255,255,0.1)", borderRadius:"50px 0 0 50px", color:"#fff", padding:"0.65rem 1.2rem", fontSize:"0.85rem", fontFamily:"'Inter',sans-serif", outline:"none", flex:1, minWidth:0 };
+const topBarStyle    = { padding:"80px 0 60px", borderBottom:"1px solid rgba(0,0,0,0.08)" };
+const logoContainerStyle = { display:"inline-block", marginBottom:"1.2rem", textDecoration:"none" };
+const taglineStyle   = { fontSize:"0.875rem", color:"#4B5563", lineHeight:1.7, maxWidth:"280px", marginBottom:"1.75rem" };
+const socialBtnStyle = { display:"inline-flex", alignItems:"center", justifyContent:"center", width:"38px", height:"38px", borderRadius:"50%", border:"1px solid rgba(0,0,0,0.15)", color:"#4B5563", textDecoration:"none", transition:"all 0.2s", fontSize:"0.8rem" };
+const colHeadStyle   = { fontSize:"0.75rem", fontWeight:700, letterSpacing:"0.15em", textTransform:"uppercase", color:"#111827", marginBottom:"1.25rem" };
+const linkStyle      = { display:"block", color:"#4B5563", textDecoration:"none", fontSize:"0.875rem", marginBottom:"0.65rem", transition:"color 0.18s" };
+const newsletterInputStyle = { background:"#fff", border:"1px solid rgba(0,0,0,0.15)", borderRadius:"50px 0 0 50px", color:"#111827", padding:"0.65rem 1.2rem", fontSize:"0.85rem", fontFamily:"'Inter',sans-serif", outline:"none", flex:1, minWidth:0 };
 const newsletterBtnStyle   = { background:"#FF6B4A", border:"none", borderRadius:"0 50px 50px 0", color:"#fff", padding:"0.65rem 1.3rem", fontFamily:"'Inter',sans-serif", fontSize:"0.8rem", fontWeight:700, cursor:"pointer", letterSpacing:"0.06em", whiteSpace:"nowrap", transition:"background 0.18s" };
 const bottomBarStyle = { padding:"1.5rem 0", display:"flex", flexWrap:"wrap", alignItems:"center", justifyContent:"space-between", gap:"0.75rem" };
-const bottomTextStyle = { fontSize:"0.78rem", color:"rgba(255,255,255,0.3)" };
+const bottomTextStyle = { fontSize:"0.78rem", color:"#6B7280" };
 
 /* ── Nav link map — matches Header.jsx hrefs exactly ── */
 const footerLinks = {
@@ -70,14 +71,16 @@ export default function Footer() {
 
             {/* Brand col */}
             <div className="col-12 col-md-4 col-lg-3">
-              <a href="#home" style={logoStyle}>
-                Dream<span style={{ color:"#FF6B4A" }}>Capture</span>
+              {/* Logo swapped in here! */}
+              <a href="#home" style={logoContainerStyle}>
+                <img src={logo} alt="Dream Capture Logo" style={{ height: '45px', width: 'auto' }} />
               </a>
+              
               <p style={taglineStyle}>
                 Crafting unforgettable journeys for curious souls since 2009. Your story starts here.
               </p>
 
-              {/* Contact details — useful for customers after booking */}
+              {/* Contact details */}
               <div style={{ marginBottom:"1.5rem" }}>
                 {[
                   { icon:"📍", text:"Ernakulam, Kerala, India" },
@@ -86,7 +89,7 @@ export default function Footer() {
                 ].map(({ icon, text }) => (
                   <div key={text} style={{ display:"flex", gap:"8px", alignItems:"flex-start",
                     marginBottom:"0.5rem", fontFamily:"'Inter',sans-serif",
-                    fontSize:"0.8rem", color:"rgba(255,255,255,0.45)" }}>
+                    fontSize:"0.8rem", color:"#4B5563" }}>
                     <span style={{ flexShrink:0 }}>{icon}</span>
                     <span>{text}</span>
                   </div>
@@ -98,21 +101,21 @@ export default function Footer() {
                 {socials.map((s) => (
                   <a key={s.label} href="#" style={socialBtnStyle} aria-label={s.label}
                     onMouseEnter={e => { e.currentTarget.style.background="#FF6B4A"; e.currentTarget.style.borderColor="#FF6B4A"; e.currentTarget.style.color="#fff"; }}
-                    onMouseLeave={e => { e.currentTarget.style.background="transparent"; e.currentTarget.style.borderColor="rgba(255,255,255,0.12)"; e.currentTarget.style.color="rgba(255,255,255,0.55)"; }}>
+                    onMouseLeave={e => { e.currentTarget.style.background="transparent"; e.currentTarget.style.borderColor="rgba(0,0,0,0.15)"; e.currentTarget.style.color="#4B5563"; }}>
                     {s.svg}
                   </a>
                 ))}
               </div>
             </div>
 
-            {/* Link columns — all hrefs point to real sections */}
+            {/* Link columns */}
             {Object.entries(footerLinks).map(([col, links]) => (
               <div key={col} className="col-6 col-md-2 col-lg-2">
                 <div style={colHeadStyle}>{col}</div>
                 {links.map(({ label, href }) => (
                   <a key={label} href={href} style={linkStyle}
                     onMouseEnter={e => e.target.style.color="#FF6B4A"}
-                    onMouseLeave={e => e.target.style.color="rgba(255,255,255,0.6)"}>
+                    onMouseLeave={e => e.target.style.color="#4B5563"}>
                     {label}
                   </a>
                 ))}
@@ -127,9 +130,9 @@ export default function Footer() {
               </p>
 
               {subscribed ? (
-                <div style={{ background:"rgba(16,185,129,0.12)", border:"1px solid rgba(16,185,129,0.3)",
+                <div style={{ background:"rgba(16,185,129,0.1)", border:"1px solid rgba(16,185,129,0.3)",
                   borderRadius:"12px", padding:"0.8rem 1rem",
-                  fontFamily:"'Inter',sans-serif", fontSize:"0.82rem", color:"#34D399" }}>
+                  fontFamily:"'Inter',sans-serif", fontSize:"0.82rem", color:"#059669" }}>
                   ✓ You're subscribed! Watch your inbox.
                 </div>
               ) : (
@@ -146,8 +149,8 @@ export default function Footer() {
                 </div>
               )}
 
-              {/* UPI payment note — helpful for customers */}
-              <div style={{ marginTop:"1.5rem", background:"rgba(255,107,74,0.08)",
+              {/* UPI payment note */}
+              <div style={{ marginTop:"1.5rem", background:"rgba(255,107,74,0.06)",
                 border:"1px solid rgba(255,107,74,0.2)", borderRadius:"10px",
                 padding:"0.75rem 1rem" }}>
                 <div style={{ fontFamily:"'Inter',sans-serif", fontSize:"0.7rem",
@@ -156,7 +159,7 @@ export default function Footer() {
                   We Accept
                 </div>
                 <div style={{ fontFamily:"'Inter',sans-serif", fontSize:"0.78rem",
-                  color:"rgba(255,255,255,0.5)" }}>
+                  color:"#6B7280" }}>
                   UPI · GPay · PhonePe · Paytm · Bank Transfer
                 </div>
               </div>
@@ -178,8 +181,8 @@ export default function Footer() {
             ].map(({ label, href }) => (
               <a key={label} href={href}
                 style={{ ...bottomTextStyle, textDecoration:"none", transition:"color 0.18s" }}
-                onMouseEnter={e => e.target.style.color="rgba(255,255,255,0.6)"}
-                onMouseLeave={e => e.target.style.color="rgba(255,255,255,0.3)"}>
+                onMouseEnter={e => e.target.style.color="#111827"}
+                onMouseLeave={e => e.target.style.color="#6B7280"}>
                 {label}
               </a>
             ))}
