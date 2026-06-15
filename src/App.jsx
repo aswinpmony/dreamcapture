@@ -6,6 +6,7 @@ import TourList from './ui/TourList';
 import TourCard from './ui/TourCard';
 import Gallery from './ui/Gallery';
 import Footer from './ui/Footer';
+import WhatsAppButton from './ui/WhatsAppButton';
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
         <TourList />
       </div>
      <Gallery />
-      <Footer /> {/* Place it at the very bottom */}
+      <Footer /> 
+      <WhatsAppButton/>
  
     </div>
   );

@@ -8,8 +8,8 @@ import React, { useState } from "react";
    2. Put your cousin's real UPI ID
    ════════════════════════════════════════════════ */
 const WEB3FORMS_ACCESS_KEY = "5128535f-85b0-40a0-aa33-5215ab4a6068"; // <-- Paste your Web3Forms key here
-const UPI_ID        = "dreamcapture@upi";   // <-- Your real UPI ID
-const BUSINESS_NAME = "Dream Capture Travels";
+const UPI_ID        = "capturedreams@upi";   // <-- Your real UPI ID
+const BUSINESS_NAME = "CAPTURE DREAMS HOLIDAYS";
 
 /* ── Styles ── */
 const backdropStyle = {

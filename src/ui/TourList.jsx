@@ -30,7 +30,7 @@ const filterBtnActive = {
   ...filterBtnBase, background: "#0A0F1E", borderColor: "#0A0F1E", color: "#fff",
 };
 
-const filters = ["All", "Europe", "Asia", "Africa", "Americas"];
+const filters = ["All", "Domestic", "International"];
 
 export default function TourList() {
   const [tours, setTours] = useState([]);

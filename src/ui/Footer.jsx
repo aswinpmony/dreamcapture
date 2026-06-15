@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import logo from '../assets/CAPTURE-DREAMS-LOGO.png'; // <- Imported your logo!
+import logo from '../assets/CAPTURE-DREAMS-LOGO.png'; 
 
 const footerStyle = {
-  background: "#F8F9FA", // Clean light gray/white background
+  background: "#F8F9FA",
   borderTop: "1px solid rgba(0,0,0,0.08)",
   fontFamily: "'Inter', sans-serif",
 };
@@ -43,10 +43,10 @@ const footerLinks = {
 };
 
 const socials = [
-  { label:"Instagram", svg:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> },
-  { label:"Facebook",  svg:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> },
-  { label:"Twitter",   svg:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg> },
-  { label:"YouTube",   svg:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg> },
+  { label:"Instagram", href:"https://www.instagram.com/capturedreams_holidays?igsh=MXBxMXJ4eTNyOWM3NQ==", svg:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> },
+  { label:"Facebook",  href:"https://www.facebook.com/share/1JZP7S6Fhf/", svg:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> },
+  { label:"Twitter",   href:"#", svg:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg> },
+  { label:"YouTube",   href:"#", svg:<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg> },
 ];
 
 export default function Footer() {
@@ -84,8 +84,8 @@ export default function Footer() {
               <div style={{ marginBottom:"1.5rem" }}>
                 {[
                   { icon:"📍", text:"Ernakulam, Kerala, India" },
-                  { icon:"📞", text:"+91 9696969696" },
-                  { icon:"✉️", text:"hello@dreamcapture.in" },
+                  { icon:"📞", text:"+91 9633172507" },
+                  { icon:"✉️", text:"info@capturedreams.in" },
                 ].map(({ icon, text }) => (
                   <div key={text} style={{ display:"flex", gap:"8px", alignItems:"flex-start",
                     marginBottom:"0.5rem", fontFamily:"'Inter',sans-serif",
@@ -96,10 +96,10 @@ export default function Footer() {
                 ))}
               </div>
 
-              {/* Socials */}
+        {/* Socials */}
               <div className="d-flex gap-2 flex-wrap">
                 {socials.map((s) => (
-                  <a key={s.label} href="#" style={socialBtnStyle} aria-label={s.label}
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" style={socialBtnStyle} aria-label={s.label}
                     onMouseEnter={e => { e.currentTarget.style.background="#FF6B4A"; e.currentTarget.style.borderColor="#FF6B4A"; e.currentTarget.style.color="#fff"; }}
                     onMouseLeave={e => { e.currentTarget.style.background="transparent"; e.currentTarget.style.borderColor="rgba(0,0,0,0.15)"; e.currentTarget.style.color="#4B5563"; }}>
                     {s.svg}
@@ -171,7 +171,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div style={bottomBarStyle}>
           <span style={bottomTextStyle}>
-            © {new Date().getFullYear()} DreamCapture Travels. All rights reserved.
+            © {new Date().getFullYear()} Capture Dreams Holidays. All rights reserved.
           </span>
           <div style={{ display:"flex", gap:"1.5rem" }}>
             {[
