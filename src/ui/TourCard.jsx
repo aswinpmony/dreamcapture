@@ -152,10 +152,11 @@ export default function TourCard({ tour }) {
       </div>
 
       {showModal && (
-        <BookingModal
-          tour={tour}
-          onClose={() => setShowModal(false)}
-        />
+       <BookingModal
+        isOpen={showModal}
+        tour={tour}
+        onClose={() => setShowModal(false)}
+      />
       )}
     </>
   );
